@@ -19,5 +19,8 @@ public class LCA {
 	ArrayList<Integer> pathOne = new ArrayList<>();
 	ArrayList<Integer> pathTwo = new ArrayList<>();
 	
+	private int findLCA(Node root, int nodeOne, int nodeTwo) {
+		return -1;
+	}
 	
 }
