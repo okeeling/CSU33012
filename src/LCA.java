@@ -23,4 +23,8 @@ public class LCA {
 		return -1;
 	}
 	
+	private boolean findPath(Node root, int number, ArrayList<Integer> path) {
+		return false;
+	}
+	
 }
