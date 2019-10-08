@@ -17,15 +17,37 @@ class Node {
 public class LCA {
 	
 	Node root;
-	List<Integer> pathOne = new ArrayList<>();
-	List<Integer> pathTwo = new ArrayList<>();
+	List<Integer> nodeOnePath = new ArrayList<>();
+	List<Integer> nodeTwoPath = new ArrayList<>();
 	
 	private int findLCA(Node root, int nodeOne, int nodeTwo) {
 		return -1;
 	}
 	
-	private boolean findPath(Node root, int number, ArrayList<Integer> path) {
+	private boolean findPath(Node root, int num, List<Integer> path) {
+		
+		if(root == null) {
+			return false;
+		}
+		
+		path.add(root.data);
+		
+		if (root.data == num) {
+			return true;
+		}
+		
+		if (root.left != null) {
+			findPath(root.left, num, path);
+			return true;
+		}
+		
+		if (root.right != null) {
+			findPath(root.right, num, path);
+			return true;
+		}
+		
 		return false;
+		
 	}
 	
 }
