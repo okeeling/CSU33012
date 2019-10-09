@@ -1,7 +1,7 @@
+// Implement a function that can calculate the lowest common ancestor in a graph, that may be structured as a binary tree.
+
 import java.util.ArrayList;
 import java.util.List;
-
-// Implement a function that can calculate the lowest common ancestor in a graph, that may be structured as a binary tree.
 
 class Node {
 	int data;
@@ -27,26 +27,30 @@ public class LCA {
 	private boolean findPath(Node root, int num, List<Integer> path) {
 		
 		if(root == null) {
+			
 			return false;
+			
+		} else { 
+			
+			path.add(root.data);
+			
+			if (root.data == num) {
+				return true;
+			}
+			
+			if (root.left != null) {
+				findPath(root.left, num, path);
+			}
+			
+			if (root.right != null) {
+				findPath(root.right, num, path);
+			}
+			
+			path.remove(path.size() - 1);
+			
+			return false;
+			
 		}
-		
-		path.add(root.data);
-		
-		if (root.data == num) {
-			return true;
-		}
-		
-		if (root.left != null) {
-			findPath(root.left, num, path);
-			return true;
-		}
-		
-		if (root.right != null) {
-			findPath(root.right, num, path);
-			return true;
-		}
-		
-		return false;
 		
 	}
 	
