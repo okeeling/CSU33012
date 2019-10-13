@@ -20,6 +20,12 @@ public class LCA {
 	List<Integer> nodeOnePath = new ArrayList<>();
 	List<Integer> nodeTwoPath = new ArrayList<>();
 	
+	int functionLCA(int nodeOne, int nodeTwo) {
+		nodeOnePath.clear();
+		nodeTwoPath.clear();
+		return findLCA(root, nodeOne, nodeTwo);
+	}
+	
 	private int findLCA(Node root, int nodeOne, int nodeTwo) {
 		if (!findPath(root, nodeOne, nodeOnePath) || !findPath(root, nodeTwo, nodeTwoPath)) {
 			if(nodeOnePath.size() == 0 && nodeTwoPath.size() == 0) {
