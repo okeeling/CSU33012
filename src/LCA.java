@@ -15,7 +15,7 @@ class Node {
 }
 
 public class LCA {
-	
+
 	Node root;
 	List<Integer> nodeOnePath = new ArrayList<>();
 	List<Integer> nodeTwoPath = new ArrayList<>();
@@ -41,6 +41,7 @@ public class LCA {
 			if (nodeTwoPath.size() > 0 && nodeOnePath.size() == 0) {
 				System.out.println("Node 2 is present but Node 1 is not present in the tree.");
 			}
+			return -1;
 		}
 		int index;
 		for (index = 0; index < nodeOnePath.size() && index < nodeTwoPath.size(); index++) {
@@ -59,11 +60,11 @@ public class LCA {
 			if (root.data == num) {
 				return true;
 			}
-			if (root.left != null) {
-				findPath(root.left, num, path);
+			if (root.left != null && findPath(root.left, num, path)) {
+				return true;
 			}
-			if (root.right != null) {
-				findPath(root.right, num, path);
+			if (root.right != null && findPath(root.right, num, path)) {
+				return true;
 			}
 			path.remove(path.size() - 1);
 			return false;
