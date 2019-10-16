@@ -19,6 +19,32 @@ public class DAG {
 	List<Integer> nodeOnePath = new ArrayList<>();
 	List<Integer> nodeTwoPath = new ArrayList<>();
 	
+	private int findLCADAG(NodeDAG root, int nodeOne, int nodeTwo) {
+		if (!findPathDAG(root, nodeOne, nodeOnePath) || !findPathDAG(root, nodeTwo, nodeTwoPath)) {
+			if(nodeOnePath.size() == 0 && nodeTwoPath.size() == 0) {
+				if(!nodeOnePath.contains(nodeOne) && !nodeTwoPath.contains(nodeTwo)) {
+					System.out.println("These nodes do not exist in the tree.");
+				} else {
+					System.out.println("The tree is empty.");
+				}
+			}
+			if (nodeOnePath.size() > 0 && nodeTwoPath.size() == 0) {
+				System.out.println("Node 1 is present but Node 2 is not present in the tree.");
+			}
+			if (nodeTwoPath.size() > 0 && nodeOnePath.size() == 0) {
+				System.out.println("Node 2 is present but Node 1 is not present in the tree.");
+			}
+			return -1;
+		}
+		int index;
+		for (index = 0; index < nodeOnePath.size() && index < nodeTwoPath.size(); index++) {
+			if (!nodeOnePath.get(index).equals(nodeTwoPath.get(index))) {
+				break;
+			}
+		}
+		return nodeOnePath.get(index - 1);
+	}
+	
 	private boolean findPathDAG(NodeDAG root, int num, List<Integer> path) {
 		if (root == null) {
 			return false;	
