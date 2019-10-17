@@ -19,6 +19,16 @@ public class DAG {
 	List<Integer> nodeOnePath = new ArrayList<>();
 	List<Integer> nodeTwoPath = new ArrayList<>();
 	
+	int functionLCADAG(int node1, int node2) {
+		nodeOnePath.clear();
+		nodeTwoPath.clear();
+		return findLCADAG(root, node1, node2);
+	}
+	
+	int functionLCADAG2(NodeDAG node1, NodeDAG node2) {
+		return findLCADAG2(root, node1, node2);
+	}
+	
 	private int findLCADAG(NodeDAG root, int nodeOne, int nodeTwo) {
 		if(!findPathDAG(root, nodeOne, nodeOnePath) || !findPathDAG(root, nodeTwo, nodeTwoPath)) {
 			if(nodeOnePath.size() == 0 && nodeTwoPath.size() == 0) {
