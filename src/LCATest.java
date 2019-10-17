@@ -14,7 +14,7 @@ class LCATest {
 	public void testOneNodeTree() {
 		LCA tree = new LCA();
 		tree.root = new Node(1);
-		assertEquals("Lowest common ancestor of a one node tree:", -1, tree.functionLCA(0, 0));
+		assertEquals("Lowest common ancestor of a one node tree:", -1, tree.functionLCA(1, 0));
 	}
 	
 	@Test
