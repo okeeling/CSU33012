@@ -55,7 +55,7 @@ public class DAG {
 		return nodeOnePath.get(index - 1);
 	}
 	
-	private int findLCADAG2(NodeDAG root, NodeDAG nodeOne, NodeDAG nodeTwo) {
+	protected int findLCADAG2(NodeDAG root, NodeDAG nodeOne, NodeDAG nodeTwo) {
 		if(nodeOne != null && nodeTwo != null) {
 			if (nodeOne.ancestors != null && nodeTwo.ancestors != null) {
 				for (int indexOne = 0; indexOne < nodeTwo.ancestors.size(); indexOne++) {
@@ -66,7 +66,7 @@ public class DAG {
 					}
 				}
 			} else {
-				return root.data;
+				return -1;
 			}	
 		}
 		return -1;
