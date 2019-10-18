@@ -64,4 +64,98 @@ class DAGTest {
 		assertEquals("LCA of tree is out of order", 10, tree.functionLCADAG(60, 20));
 		assertEquals("LCA of tree is out of order", 50, tree.functionLCADAG(70, 20));
 	}
+	
+	@Test
+	public void testDAG1() {
+	
+//      1
+//      |
+//      ^
+//	    |
+//	    2 --<-- 3
+//	    |       |
+//	    ^       ^
+//	    |       |
+//	    4       5
+//       \      /
+//        ^    ^
+//          \ /
+//           6
+		
+		DAG graph = new DAG();
+		NodeDAG root = new NodeDAG(1);
+		NodeDAG nodeTwo = new NodeDAG(2);
+		NodeDAG nodeThree = new NodeDAG(3);
+		NodeDAG nodeFour = new NodeDAG(4);
+		NodeDAG nodeFive = new NodeDAG(5);
+		NodeDAG nodeSix = new NodeDAG(6);
+		graph.addToGraph(root);
+		graph.addToGraph(nodeTwo);
+		graph.addToGraph(nodeThree);
+		graph.addToGraph(nodeFour);
+		graph.addToGraph(nodeFive);
+		graph.addToGraph(nodeSix);
+		graph.addAncestorsToNode(root, nodeTwo);
+		graph.addAncestorsToNode(nodeTwo, nodeThree);
+		graph.addAncestorsToNode(nodeTwo, nodeFour);
+		graph.addAncestorsToNode(nodeThree, nodeFive);
+		graph.addAncestorsToNode(nodeFive, nodeSix);
+		graph.addAncestorToNode2(nodeFour, nodeSix, 1);
+		assertEquals(5, graph.findLCADAG2(root, nodeSix, nodeFive));
+		assertEquals(4, graph.findLCADAG2(root, nodeSix, nodeFour));
+		assertEquals(3, graph.findLCADAG2(root, nodeSix, nodeThree));
+		assertEquals(2, graph.findLCADAG2(root, nodeFour, nodeFive));
+		assertEquals(2, graph.findLCADAG2(root, nodeSix, nodeTwo));
+		assertEquals(1, graph.findLCADAG2(root, nodeTwo, root));
+		assertEquals(1, graph.findLCADAG2(root, root, root));
+	}
+
+	@Test
+	public void testDAG2() {
+	
+	//             3
+	//            / \
+	//           ^   V
+	//          /     \
+	//   1 ->- 2  ->-  5
+	//          \     / \
+	//           V   ^   V
+	//            \ /     \
+	//             4       6
+	//            /
+	//           ^
+	//          /
+	//         7
+	
+		DAG graph = new DAG();
+		NodeDAG root = new NodeDAG(1);
+		NodeDAG nodeTwo = new NodeDAG(2);
+		NodeDAG nodeThree = new NodeDAG(3);
+		NodeDAG nodeFour = new NodeDAG(4);
+		NodeDAG nodeFive = new NodeDAG(5);
+		NodeDAG nodeSix = new NodeDAG(6);
+		NodeDAG nodeSeven = new NodeDAG(7);
+		graph.addToGraph(root);
+		graph.addToGraph(nodeTwo);
+		graph.addToGraph(nodeThree);
+		graph.addToGraph(nodeFour);
+		graph.addToGraph(nodeFive);
+		graph.addToGraph(nodeSix);
+		graph.addToGraph(nodeSeven);
+		graph.addAncestorsToNode(nodeSix, nodeFive);
+		graph.addAncestorsToNode(nodeThree, nodeTwo);	
+		graph.addAncestorsToNode(nodeFour, nodeTwo);
+		graph.addAncestorsToNode(nodeFive, nodeThree);
+		graph.addAncestorsToNode(nodeFive, nodeFour);
+		graph.addAncestorsToNode(nodeFive, nodeTwo);
+		graph.addAncestorsToNode(nodeTwo, root);
+		graph.addAncestorsToNode(nodeFour, nodeSeven);
+		assertEquals(4, graph.findLCADAG2(nodeSix, root, nodeSeven));
+		assertEquals(5, graph.findLCADAG2(nodeSix, nodeThree, nodeSeven));
+		assertEquals(6, graph.findLCADAG2(nodeSix, nodeFive, nodeSix));
+		assertEquals(5, graph.findLCADAG2(nodeSix, nodeThree, nodeFour));
+		assertEquals(4, graph.findLCADAG2(nodeSix, nodeTwo, nodeSeven));
+		assertEquals(2, graph.findLCADAG2(nodeSix, root, nodeTwo));
+		assertEquals(6,	graph.findLCADAG2(nodeSix, nodeSix, nodeSix));
+	}
 }
