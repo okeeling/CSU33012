@@ -158,4 +158,19 @@ class DAGTest {
 		assertEquals(2, graph.findLCADAG2(nodeSix, root, nodeTwo));
 		assertEquals(6,	graph.findLCADAG2(nodeSix, nodeSix, nodeSix));
 	}
+	
+	@Test
+	public void testEmptyGraph() {
+		DAG graph = new DAG();
+		assertEquals(-1, graph.findLCADAG2(null, null, null));
+	}
+	
+	@Test
+	public void testGraphOneNode() {
+		DAG graph = new DAG();
+		NodeDAG node = new NodeDAG(1);
+		graph.addToGraph(node);
+		assertEquals(1, graph.findLCADAG2(node, node, node));
+	}
+	
 }
