@@ -1,5 +1,3 @@
-// Implement a function that can calculate the lowest common ancestor in a graph, that may be structured as a binary tree.
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,10 +21,10 @@ public class LCA {
 	int functionLCA(int nodeOne, int nodeTwo) {
 		nodeOnePath.clear();
 		nodeTwoPath.clear();
-		return findLCA(root, nodeOne, nodeTwo);
+		return functionLCA(root, nodeOne, nodeTwo);
 	}
 	
-	private int findLCA(Node root, int nodeOne, int nodeTwo) {
+	private int functionLCA(Node root, int nodeOne, int nodeTwo) {
 		if (!findPath(root, nodeOne, nodeOnePath) || !findPath(root, nodeTwo, nodeTwoPath)) {
 			if(nodeOnePath.size() == 0 && nodeTwoPath.size() == 0) {
 				if(!nodeOnePath.contains(nodeOne) && !nodeTwoPath.contains(nodeTwo)) {
