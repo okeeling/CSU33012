@@ -8,14 +8,14 @@ class DAGTest {
 	@Test
 	public void testEmptyTree() {
 		DAG tree = new DAG();
-		assertEquals("Lowest common ancestor of empty tree:", -1, tree.functionLCADAG(0, 0));
+		assertEquals("LCA of empty tree:", -1, tree.functionLCADAG(0, 0));
 	}
 	
 	@Test
 	public void testOneNodeTree() {
 		DAG tree = new DAG();
 		tree.root = new NodeDAG(1);
-		assertEquals("Lowest common ancestor of a one node tree:", -1, tree.functionLCADAG(1, 0));
+		assertEquals("LCA of a one node tree:", -1, tree.functionLCADAG(1, 0));
 	}
 	
 	@Test
@@ -34,6 +34,30 @@ class DAGTest {
 		assertEquals("LCA of 4 and 5:", 2, tree.functionLCADAG(4, 5));
 		assertEquals("LCA of 6 and 7:", 3, tree.functionLCADAG(6, 7));	
 	}
+	
+	@Test
+	public void testThirteenNodeTree() {
+		DAG tree = new DAG();
+		tree.root = new NodeDAG(1);
+		tree.root.left = new NodeDAG(2);
+		tree.root.right = new NodeDAG(3);
+		tree.root.left.left = new NodeDAG(4);
+		tree.root.left.right = new NodeDAG(5);
+		tree.root.right.left = new NodeDAG(6);
+		tree.root.right.right = new NodeDAG(7);
+		tree.root.left.left.left = new NodeDAG(8);
+		tree.root.left.left.right = new NodeDAG(9);
+		tree.root.left.right.left = new NodeDAG(10);
+		tree.root.left.right.right = new NodeDAG(11);
+		tree.root.right.left.left = new NodeDAG(12);
+		tree.root.right.left.right = new NodeDAG(13);
+		assertEquals("LCA of 1 and 12:", 1, tree.functionLCADAG(1,12));
+		assertEquals("LCA of 2 and 3:", 1, tree.functionLCADAG(2,3));
+		assertEquals("LCA of 12 and 13:", 6, tree.functionLCADAG(12,13));
+		assertEquals("LCA of 8 and 9:", 4, tree.functionLCADAG(8,9));
+		assertEquals("LCA of 4 and 13:", 1, tree.functionLCADAG(4,13));
+	}
+
 	
 	@Test
 	public void testNonExistentNode() {
@@ -63,6 +87,29 @@ class DAGTest {
 		assertEquals("LCA of tree is out of order", 30, tree.functionLCADAG(30, 40));
 		assertEquals("LCA of tree is out of order", 10, tree.functionLCADAG(60, 20));
 		assertEquals("LCA of tree is out of order", 50, tree.functionLCADAG(70, 20));
+	}
+	
+	@Test
+	public void testSameNodes(){
+		DAG tree = new DAG();
+		tree.root = new NodeDAG(4);
+		tree.root.left = new NodeDAG(4);
+		tree.root.right = new NodeDAG(4);
+		tree.root.left.left = new NodeDAG(4);
+		tree.root.left.right = new NodeDAG(4);
+		tree.root.right.left = new NodeDAG(4);
+		tree.root.right.right = new NodeDAG(4);
+		assertEquals("LCA of 4 and 4: ", 4, tree.functionLCADAG(4, 4));
+	}
+	
+	@Test 
+	public void unevenTree() { 
+		DAG tree = new DAG();
+		tree.root = new NodeDAG(1);
+		tree.root.right = new NodeDAG(2);
+		tree.root.right.right = new NodeDAG(3);
+		assertEquals("LCA of 2 and 3: ", 2, tree.functionLCADAG(2, 3));	
+		assertEquals("LCA of 3 and 1: ", 1, tree.functionLCADAG(3, 1));
 	}
 	
 	@Test
@@ -172,5 +219,4 @@ class DAGTest {
 		graph.addToGraph(node);
 		assertEquals(1, graph.findLCADAG2(node, node, node));
 	}
-	
 }
